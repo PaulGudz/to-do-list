@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+
+      @media (min-width:1000px) {
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10vh;
+      }
+      body {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(46, 42, 42);
+      }
+      .header {
+        margin-bottom: 3vh;
+        font-size: 5vh;
+      }
+      .todo-row {
+        display: flex;
+        column-gap: 10px;
+        margin-bottom: 30px;
+        
+      }
+      .input-row {
+        display: flex;
+        column-gap: 10px;
+        margin-bottom: 30px;
+      }
+      .js-name-input {
+        width: 50rem;
+        border: none;
+        flex:1
+      }
+      .add-button {
+        width: 30vh;
+        background-color: rgb(60, 151, 60);
+        border: none;
+        font-size: 15px;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .add-button:hover {
+        opacity: 0.6;
+      }
+      .add-button:active {
+        opacity: 1;
+      }
+      .delete-todo-button {
+        width: 30vh;
+        background-color: red;
+        border: none;
+        font-size: 15px;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.1s;
+      }
+      
+      .delete-todo-button:hover {
+        opacity: 0.6;
+      }
+      .delete-todo-button:active {
+        opacity: 1;
+      }
+      .activity {
+        width: 50rem;
+        font-weight: bold;
+      }
+    }
+    @media (max-width:1000px) {
+      body {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(46, 42, 42);
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 4vh;
+      }
+      .header {
+        margin-bottom: 3vh;
+        font-size: 4vh;
+      } 
+      .input-row {
+        display: flex;
+        column-gap: 1rem;
+        margin-bottom: 30px;
+        height: 4rem;
+      }
+      .js-name-input {
+        width: 30rem;
+        border: none;
+        flex:1;
+        font-size: 2rem;
+      }
+      .js-name-input::placeholder {
+        font-size: 2rem;
+      }
+      .add-button {
+        width: 7vh;
+        background-color: rgb(60, 151, 60);
+        border: none;
+        font-size: 1vh;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .todo-row {
+        display: flex;
+        column-gap: 10px;
+        margin-bottom: 30px;
+        height: 4rem;
+      }
+      .delete-todo-button {
+        width: 7vh;
+        background-color: red;
+        border: none;
+        font-size: 1vh;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.1s;
+      }
+      .activity {
+        width: 30rem;
+        font-weight: bold;
+        font-size: 2rem;
+      }
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <div class="header">Список дел</div>
+    <div class="input-row">
+      <input class="js-name-input" type="text" placeholder="Наименование активности">
+      <button class="add-button" onclick="addName()">Добавить</button>
+    </div>
+    <div class="js-todo-list"></div>
+    </div>
+    <script>
+      let names = JSON.parse(localStorage.getItem('hello')) || [];
+      renderNames();
+      function addName() {
+        let todoListHTML = '';
+        
+        const myInput = document.querySelector('.js-name-input')
+        const name = myInput.value;
+
+        names.push(name)
+        myInput.value = '';
+
+        renderNames()
+        
+        saveList()
+        }
+
+        function renderNames() {
+          let todoListHTML= '';
+
+          for(let i = 0; i < names.length; i++) {
+            const todo = names[i]
+            todoListHTML += 
+            
+              `<div class="todo-row">
+                <div class='activity'>${todo}</div>
+                <button class="delete-todo-button" onclick="deleteTodo(${i})">
+                Удалить</button>
+                </div>`
+              
+          }
+          document.querySelector('.js-todo-list')
+            .innerHTML = todoListHTML
+        }
+        
+        function deleteTodo(index) {
+          names.splice(index, 1);
+          renderNames();
+          saveList();
+        }
+
+        function saveList() {
+          localStorage.setItem('hello', JSON.stringify(names));
+        }
+    </script>
+
+  </body>
+</html>
