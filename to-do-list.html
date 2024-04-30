@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(46, 42, 42);
+      }
+      .header {
+        margin-bottom: 10px;
+      }
+      .todo-row {
+        display: grid;
+        align-items: center;
+        column-gap: 10px;
+        grid-template-columns:  200px 100px;
+        margin-bottom: 10px;
+      }
+      .input-row {
+        display: grid;
+        grid-template-columns: 200px 100px;
+        column-gap: 10px;
+        margin-bottom: 30px;
+      }
+      .add-button {
+        background-color: rgb(60, 151, 60);
+        border: none;
+        font-size: 15px;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .add-button:hover {
+        opacity: 0.6;
+      }
+      .add-button:active {
+        opacity: 1;
+      }
+      .delete-todo-button {
+        background-color: red;
+        border: none;
+        font-size: 15px;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.1s;
+      }
+      
+      .delete-todo-button:hover {
+        opacity: 0.6;
+      }
+      .delete-todo-button:active {
+        opacity: 1;
+      }
+      .activity {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">Список дел</div>
+    <div class="input-row">
+      <input class="js-name-input" type="text" placeholder="Наименование активности">
+      <button class="add-button" onclick="addName()">Добавить</button>
+    </div>
+    <div class="js-todo-list"></div>
+
+    <script>
+      let names = JSON.parse(localStorage.getItem('hello')) || [];
+      renderNames();
+      function addName() {
+        let todoListHTML = '';
+        
+        const myInput = document.querySelector('.js-name-input')
+        const name = myInput.value;
+
+        names.push(name)
+        myInput.value = '';
+
+        renderNames()
+        
+        saveList()
+        }
+
+        function renderNames() {
+          let todoListHTML= '';
+
+          for(let i = 0; i < names.length; i++) {
+            const todo = names[i]
+            todoListHTML += 
+            
+              `<div class="todo-row">
+                <div class='activity'>${todo}</div>
+                <button class="delete-todo-button" onclick="deleteTodo(${i})">
+                Удалить</button>
+                </div>`
+              
+          }
+          document.querySelector('.js-todo-list')
+            .innerHTML = todoListHTML
+        }
+        
+        function deleteTodo(index) {
+          names.splice(index, 1);
+          renderNames();
+          saveList();
+        }
+
+        function saveList() {
+          localStorage.setItem('hello', JSON.stringify(names));
+        }
+    </script>
+
+  </body>
+</html>
