@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+
+      @media (min-width:1000px) {
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10vh;
+      }
+      body {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(46, 42, 42);
+      }
+      .header {
+        margin-bottom: 3vh;
+        font-size: 5vh;
+      }
+      .todo-row {
+        display: flex;
+        column-gap: 10px;
+        margin-bottom: 30px;
+        justify-content: space-between;
+        background-color: gray;
+        padding: 10px;
+        border-radius: 15px;
+        
+      }
+      .input-row {
+        display: flex;
+        column-gap: 10px;
+        margin-bottom: 30px;
+      }
+      .js-name-input {
+        width: 50rem;
+        border: none;
+        flex:1;
+        text-align: center;
+      }
+      .js-name-input::placeholder {
+        text-align: center;
+        font-size: 20px;
+      }
+      .add-button {
+        width: 30vh;
+        background-color: rgb(60, 151, 60);
+        border: none;
+        font-size: 15px;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .add-button:hover {
+        opacity: 0.6;
+      }
+      .add-button:active {
+        opacity: 1;
+      }
+      .delete-todo-button {
+        width: 100%;
+        background-color: red;
+        border: none;
+        font-size: 15px;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.1s;
+      }
+      .buttons-row {
+        display: flex;
+      }
+      .done-icon {
+        height: 30px;        ;
+      }
+      .done-todo-button {
+        background:none;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+      .done-todo-button:hover {
+        background-color: white;
+        border-radius: 100px;
+      }
+      .delete-todo-button:hover {
+        opacity: 0.6;
+      }
+      .delete-todo-button:active {
+        opacity: 1;
+      }
+      .activity {
+        width: 50rem;
+        font-weight: bold;
+        font-size:30px
+      }
+      .js-date {
+        width: 30vh;
+        font-size: 20px;
+        border-radius: 10px;
+        color: white;
+      }
+      .date-button-row {
+        padding-left: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 280px;
+      }
+      .js-counter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .done-text {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .reset-button {
+        border: none;
+        margin-top: 10px;
+        background: none;
+        width: 50%;
+        cursor: pointer;
+        padding-top: 3px;
+      }
+      .reset-button:active {
+        background-color: white;
+        opacity: 0.5;
+        border-radius: 20px;
+      }
+      .reset-button:hover .reset-icon {
+        animation: rotateAnimation 1s infinite linear
+      }
+      @keyframes rotateAnimation {
+        100% {
+        transform: rotate(360deg); 
+    }
+      }
+      .reset-icon {
+        height: 30px;
+      }
+
+    }
+    @media (max-width:1000px) {
+      body {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(46, 42, 42);
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 4vh;
+      }
+      .header {
+        margin-bottom: 3vh;
+        font-size: 4vh;
+      } 
+      .input-row {
+        display: flex;
+        column-gap: 1rem;
+        margin-bottom: 30px;
+        height: 4rem;
+      }
+      .js-name-input {
+        width: 30rem;
+        border: none;
+        flex:1;
+        font-size: 2rem;
+      }
+      .js-name-input::placeholder {
+        font-size: 2rem;
+      }
+      .add-button {
+        width: 7vh;
+        background-color: rgb(60, 151, 60);
+        border: none;
+        font-size: 1vh;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .add-button:active {
+        opacity: 0.6;
+      }
+      .todo-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: gray;
+        padding: 20px;
+        border-radius: 15px;
+        column-gap: 10px;
+        margin-bottom: 30px;
+      }
+      .buttons-row {
+        display: flex;
+      }
+      .date-button-row {
+        padding-left: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 250px;
+      }
+      .delete-todo-button {
+        width: 100%;
+        background-color: red;
+        border: none;
+        font-size: 1vh;
+        padding: 10px 20px 10px 20px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .delete-todo-button:active {
+        opacity: 1;
+      }
+      .done-icon {
+        height: 30px;        
+      }
+      .done-todo-button {
+        background:none;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+      .done-todo-button:active {
+        background-color: white;
+        border-radius: 100px;
+      }
+      .activity {
+        width: 30rem;
+        font-weight: bold;
+        font-size: 2rem;
+      }
+      .js-counter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .reset-button {
+        padding-top: 10px;
+        border: none;
+        margin-top: 10px;
+        background: none;
+        width: 50%;
+        cursor: pointer;
+        padding-top: 3px;
+      }
+      .reset-icon {
+        height: 30px;
+      }
+
+      .reset-button:active {
+        background-color: white;
+        opacity: 0.5;
+        border-radius: 20px;
+        padding: 0
+      }
+      .done-text {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <div class="header">Список дел</div>
+    <div class="input-row">
+      <input class="js-name-input" type="text" placeholder="Наименование активности">
+      <input class="js-date-input" type="date">
+      <button class="add-button" onclick="addName()">Добавить</button>
+    </div>
+    <div class="js-todo-list"></div>
+    <div class="js-counter"></div>
+    </div>
+    <script>
+      let counter = JSON.parse(localStorage.getItem('hello3')) || 0 ;
+      rednerCounter();      
+      let dates = JSON.parse(localStorage.getItem('hello2')) || [];
+      let names = JSON.parse(localStorage.getItem('hello')) || [];
+      renderNames();
+
+      function addName() {
+        let todoListHTML = '';
+        
+        const myInput = document.querySelector('.js-name-input')
+        const dateInput = document.querySelector('.js-date-input')
+        
+        const name = myInput.value;
+        const x = dateInput.value
+
+        names.push(name)
+        dates.push(x)
+        
+        myInput.value = '';
+
+        renderNames()
+        
+        rednerCounter()
+
+        saveList()
+        }
+
+        function renderNames() {
+          let todoListHTML= '';
+
+          for(let i = 0; i < names.length; i++) {
+            const y = dates[i]
+            const todo = names[i]
+            todoListHTML += 
+            
+              `<div class="todo-row">
+                <div class='activity'>${todo}</div>
+                <div class='date-button-row'>
+                <div class='js-date'>${y}</div>
+                <div class='buttons-row'><button class="delete-todo-button" onclick="deleteTodo(${i})">
+                Удалить</button>
+                <button class='done-todo-button' onclick='addCounter(${i})'>
+                  <img class='done-icon' src='greencheck.svg'></button>
+                </div>
+                </div>
+                </div>`
+              
+          }
+          document.querySelector('.js-todo-list')
+            .innerHTML = todoListHTML
+        }
+        
+        function deleteTodo(index) {
+          names.splice(index, 1);
+          dates.splice(index, 1);
+          renderNames();
+          saveList();
+        }
+
+        function addCounter(index) {
+          deleteTodo(index)
+          counter++;
+          saveList();
+          rednerCounter();
+        }
+
+        function resetDone() {
+          counter = 0;
+          saveList();
+          rednerCounter();
+        }
+
+        function rednerCounter() {
+          let counterHTML = '';
+          counterHTML +=
+           `<div class='done-text'>Выполнено дел: ${counter}</div>
+            <button onclick='resetDone()' class='reset-button'>
+            <img class='reset-icon' src='reset.webp'>
+            </button>`
+          document.querySelector('.js-counter')
+            .innerHTML = counterHTML
+        }
+
+        function saveList() {
+          localStorage.setItem('hello3', JSON.stringify(counter));
+          localStorage.setItem('hello', JSON.stringify(names));
+          localStorage.setItem('hello2', JSON.stringify(dates));
+        }
+    </script>
+  </body>
+</html>
